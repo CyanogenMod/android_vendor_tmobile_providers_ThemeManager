@@ -36,7 +36,6 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
-import android.provider.DrmStore;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -208,10 +207,6 @@ public class PackageResourcesProvider extends ContentProvider {
 
             case TYPE_ASSET_PATH:
                 String assetPath = uri.getLastPathSegment();
-                if (assetPath.contains("/locked/")) {
-                    /* Make sure the caller has DRM access permission.  This should basically only be the media service process.  This call technically checks whether our own process holds this permission as well so it's extremely important the ThemeManager never requests this in the manifest. */
-                    DrmStore.enforceAccessDrmPermission(getContext());
-                }
                 try {
                     return packageRes.getAssets().openFd(assetPath);
                 } catch (FileNotFoundException e) {

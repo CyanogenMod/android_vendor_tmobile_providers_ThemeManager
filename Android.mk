@@ -10,6 +10,8 @@ LOCAL_PACKAGE_NAME := ThemeManager
 LOCAL_STATIC_JAVA_LIBRARIES := \
 	com.tmobile.themes
 
+LOCAL_PRIVILEGED_MODULE := true
+
 include $(BUILD_PACKAGE)
 
 # including the test apk
